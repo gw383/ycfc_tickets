@@ -15,5 +15,5 @@ The script:
 5. Compares the current fixture list against previously stored fixtures.
 6. Sends an email alert if a new fixture is detected.
 7. Updates the stored fixture list for future checks.
-
+8. Schedule to run every 10 minutes via Windows Task Scheduler
 
