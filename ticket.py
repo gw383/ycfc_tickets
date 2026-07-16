@@ -19,9 +19,9 @@ IMAGE_PATH = "fixtures_full.png"
 DATA_FILE = "fixtures.json"
 TEAMS_FILE = "teams.json"
 
-EMAIL_FROM = "georgewilliams383@gmail.com"
-EMAIL_TO = "georgewilliams383@gmail.com"
-EMAIL_PASSWORD = os.getenv("YCFC_GMAIL_PASSWORD")
+EMAIL_FROM = "your_email"
+EMAIL_TO = "your_email"
+EMAIL_PASSWORD = os.getenv("YCFC_GMAIL_PASSWORD") # this is retrieved from gmail/emailing service and set in the venv
 
 # IMPORTANT:
 # Point this at the COPY of your Chrome profile, not your live profile.
