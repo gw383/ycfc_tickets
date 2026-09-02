@@ -19,15 +19,15 @@ IMAGE_PATH = "fixtures_full.png"
 DATA_FILE = "fixtures.json"
 TEAMS_FILE = "teams.json"
 
-EMAIL_FROM = "your_email"
-EMAIL_TO = "your_email"
+EMAIL_FROM = "georgewilliams383@gmail.com"
+EMAIL_TO = "georgewilliams383@gmail.com"
 EMAIL_PASSWORD = os.getenv("YCFC_GMAIL_PASSWORD") # this is retrieved from gmail/emailing service and set in the venv
 
 # IMPORTANT:
 # Point this at the COPY of your Chrome profile, not your live profile.
 CHROME_PROFILE = r"C:\ycfc\ChromeProfile"
 
-TICKETS_URL = "https://yorkcityfootballclub.co.uk/buy-tickets/"
+TICKETS_URL = "https://www.yorkcityfootballclub.co.uk/tickets-and-hospitality/match-tickets/home-tickets"
 
 
 # ----------------------------
@@ -81,7 +81,6 @@ def load_teams():
         return json.load(f)
 
 
-
 def extract_fixtures(image_path):
 
     print("Running OCR...")
@@ -93,11 +92,20 @@ def extract_fixtures(image_path):
         output_type=Output.DICT
     )
 
+    print("\n--- TESSERACT OCR ---")
+
+    for word in data["text"]:
+
+        word = word.strip()
+
+        if word:
+            print(word)
+
+    print("---------------------\n")
 
     teams = load_teams()
 
     detected = []
-
 
     print("\n--- OCR WORDS ---")
 
@@ -116,9 +124,7 @@ def extract_fixtures(image_path):
                     f"York City vs {clean}"
                 )
 
-
     print("-----------------\n")
-
 
     return list(dict.fromkeys(detected))
 
@@ -187,41 +193,83 @@ def send_email(new_fixtures):
 
 def main():
 
+    print("Starting YCFC fixture checker...\n")
+
+    # Take new screenshot
     take_screenshot()
 
+    # Extract fixtures from screenshot
     fixtures = extract_fixtures(IMAGE_PATH)
 
     if not fixtures:
         print("No fixtures detected.")
         return
 
-    print("\nCURRENT FIXTURES:")
+
+    print("\n==============================")
+    print("CURRENT FIXTURES DETECTED")
+    print("==============================")
 
     for fixture in fixtures:
-        print(fixture)
+        print("-", fixture)
 
+
+    # Load previous stored fixtures
     previous = load_previous()
 
+
+    print("\n==============================")
+    print("PREVIOUSLY SAVED FIXTURES")
+    print("==============================")
+
+    if previous:
+        for fixture in previous:
+            print("-", fixture)
+    else:
+        print("No previous fixtures found.")
+
+
+    # Compare old vs new
     new_fixtures = get_new_fixtures(
         previous,
         fixtures
     )
 
+
+    print("\n==============================")
+    print("COMPARISON RESULT")
+    print("==============================")
+
+
     if new_fixtures:
 
-        print("\n🚨 NEW FIXTURES FOUND:")
+        print("🚨 NEW FIXTURES FOUND:")
 
         for fixture in new_fixtures:
-            print(fixture)
+            print("-", fixture)
+
 
         send_email(new_fixtures)
 
-    else:
-        print("\nNo new fixtures.")
 
+    else:
+
+        print("No new fixtures detected.")
+
+
+    # Always update stored fixtures after comparison
     save_current(fixtures)
 
-    print("\nFinished.")
+
+    print("\n==============================")
+    print("SAVED CURRENT FIXTURES")
+    print("==============================")
+
+    for fixture in fixtures:
+        print("-", fixture)
+
+
+    print("\nFinished successfully.")
 
 
 # ----------------------------
