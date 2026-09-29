@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ycfc-tickets"
+version = "2.0.0"
+description = "Get an email / phone alert the moment York City FC put a new home fixture on sale."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "George Williams" }]
+dependencies = [
+    "playwright>=1.40",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+ycfc-tickets = "ycfc_tickets.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["browser: needs a Playwright Chromium install (playwright install chromium)"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "BLE"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S106"]  # asserts and dummy passwords are fine in tests

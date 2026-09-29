@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- Minimal stand-in for the real tickets page: the Future Ticketing widget fills
+     #ft_container a moment after load, like the live site does. -->
+<html>
+<head><meta charset="utf-8"><title>Home Tickets</title></head>
+<body>
+  <nav>News Tickets Squads Fixtures Shop</nav>
+  <p>For car parking, select the fixture required.</p>
+  <div id="ft_container"></div>
+  <script>
+    // widget never renders
+    /*
+    setTimeout(function () {
+      var products = [
+        "York City v Northampton Town",
+        "York City v Accrington Stanley",
+        "York City v Accrington Stanley: Parking"
+      ];
+      var c = document.getElementById("ft_container");
+      c.innerHTML = "<div class='ft_basket'>0 Item(s) Added</div>" + products.map(function (p) {
+        return "<div class='ft_product'><img src='logo.png'><div class='ft_title'>" + p +
+               "</div><a class='ft_buy'>BUY TICKETS</a></div>";
+      }).join("");
+    }, 700);
+  */
+  </script>
+</body>
+</html>

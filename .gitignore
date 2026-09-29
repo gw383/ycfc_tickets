@@ -1,3 +1,23 @@
+# Secrets & local config
+.env
+
+# Runtime output
+data/
+logs/
+/*.png
+screenshots/
+
+# Browser profiles (large, contain cookies/sessions)
 ChromeProfile/
 User Data/
+
+# Python
 venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
