@@ -1,47 +1,69 @@
 import json
-from datetime import datetime, timedelta, timezone
 
-from ycfc_tickets.state import FixtureState
-
-NOW = datetime(2026, 10, 1, 12, 0, tzinfo=timezone.utc)
+from ycfc_tickets.state import MAX_PER_SECTION, State
 
 
-def test_missing_file_is_new(tmp_path):
-    state = FixtureState.load(tmp_path / "state.json")
-    assert state.is_new_file
-    assert state.unseen(["A", "B"]) == ["A", "B"]
+def test_missing_file_means_first_run(tmp_path):
+    state = State.load(tmp_path / "state.json")
+    assert state.is_first_run("fixtures")
+    assert state.unseen("fixtures", ["A", "B"]) == ["A", "B"]
 
 
 def test_round_trip(tmp_path):
     path = tmp_path / "nested" / "state.json"
-    state = FixtureState.load(path)
-    state.update(["York City v Barnet"], now=NOW)
+    state = State.load(path)
+    state.mark_seen("fixtures", {"York City v Barnet": "York City v Barnet"})
+    assert state.save(path) is True
+
+    loaded = State.load(path)
+    assert not loaded.is_first_run("fixtures")
+    assert loaded.is_first_run("news")  # never recorded, so news would baseline
+    assert loaded.unseen("fixtures", ["York City v Barnet", "York City v Barrow"]) == [
+        "York City v Barrow"
+    ]
+    assert json.loads(path.read_text(encoding="utf-8"))["version"] == 2
+
+
+def test_file_is_only_rewritten_when_something_new_is_seen(tmp_path):
+    path = tmp_path / "state.json"
+    state = State.load(path)
+    state.mark_seen("news", {"1": "First"})
     state.save(path)
 
-    loaded = FixtureState.load(path)
-    assert not loaded.is_new_file
-    assert loaded.unseen(["York City v Barnet", "York City v Barrow"]) == ["York City v Barrow"]
-    assert json.loads(path.read_text())["version"] == 1
+    again = State.load(path)
+    again.mark_seen("news", {"1": "First"})
+    assert again.save(path) is False
+    again.mark_seen("news", {"2": "Second"})
+    assert again.save(path) is True
 
 
-def test_fixture_that_briefly_disappears_is_not_new_again(tmp_path):
-    state = FixtureState()
-    state.update(["A", "B"], now=NOW)
-    state.update(["A"], now=NOW + timedelta(minutes=10))  # B missing on a flaky load
-    assert state.unseen(["A", "B"]) == []
+def test_item_that_briefly_disappears_is_not_new_again():
+    state = State()
+    state.mark_seen("fixtures", {"A": "A", "B": "B"})
+    state.mark_seen("fixtures", {"A": "A"})  # B missing on a flaky load
+    assert state.unseen("fixtures", ["A", "B"]) == []
 
 
-def test_first_seen_is_kept_and_last_seen_moves(tmp_path):
-    state = FixtureState()
-    state.update(["A"], now=NOW)
-    state.update(["A"], now=NOW + timedelta(hours=1))
-    entry = state.fixtures["A"]
-    assert entry["first_seen"] == NOW.isoformat()
-    assert entry["last_seen"] == (NOW + timedelta(hours=1)).isoformat()
+def test_empty_first_run_still_counts_as_recorded():
+    state = State()
+    state.mark_seen("fixtures", {})
+    assert not state.is_first_run("fixtures")
+
+
+def test_reads_the_older_file_format(tmp_path):
+    path = tmp_path / "seen_fixtures.json"
+    old = {"version": 1, "fixtures": {"York City v Barnet": {"first_seen": "x", "last_seen": "y"}}}
+    path.write_text(json.dumps(old), encoding="utf-8")
+    state = State.load(path)
+    assert state.unseen("fixtures", ["York City v Barnet"]) == []
+    assert state.is_first_run("news")
 
 
 def test_old_entries_are_forgotten():
-    state = FixtureState()
-    state.update(["Old"], now=NOW)
-    state.update(["New"], now=NOW + timedelta(days=200))
-    assert list(state.fixtures) == ["New"]
+    state = State()
+    for i in range(MAX_PER_SECTION + 25):
+        state.sections.setdefault("news", {})[str(i)] = {"first_seen": f"{i:06d}", "label": ""}
+    state.mark_seen("news", {"newest": "x"})
+    assert len(state.sections["news"]) == MAX_PER_SECTION
+    assert "0" not in state.sections["news"]
+    assert "newest" in state.sections["news"]

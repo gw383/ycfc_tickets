@@ -1,0 +1,109 @@
+# Runs the checker on GitHub's computers every few minutes, so nothing needs to be
+# switched on at home. Needs one repository secret: NTFY_TOPIC (see README).
+name: Check tickets and news
+
+on:
+  schedule:
+    # Every 5 minutes. GitHub treats this as "about every 5 minutes": runs are often
+    # a few minutes late and occasionally skipped when GitHub is busy.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      test_alert:
+        description: "Send a test notification instead of doing a normal check"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # to save what has already been seen (on the "state" branch)
+
+concurrency:
+  group: check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      # Optional repository variables (Settings > Secrets and variables > Actions > Variables)
+      NEWS_CATEGORIES: ${{ vars.NEWS_CATEGORIES }}
+      TICKETS_SOURCE: ${{ vars.TICKETS_SOURCE || 'api' }}
+      STATE_FILE: data/state.json
+      LOG_FILE: "" # print to the run log only
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install
+        run: pip install --quiet .
+
+      - name: Install browser (only if TICKETS_SOURCE is browser or auto)
+        if: env.TICKETS_SOURCE != 'api'
+        run: |
+          pip install --quiet ".[browser]"
+          python -m playwright install --with-deps chromium
+
+      - name: Check NTFY_TOPIC is set
+        run: |
+          if [ -z "$NTFY_TOPIC" ]; then
+            echo "::error::Add a repository secret called NTFY_TOPIC (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+
+      - name: Load what has already been seen
+        run: |
+          mkdir -p data
+          if git ls-remote --exit-code --heads origin state > /dev/null; then
+            git fetch --quiet --depth=1 origin state
+            git show FETCH_HEAD:state.json > data/state.json
+            echo "Loaded saved state."
+          else
+            echo "No saved state yet: this run records what's there now without alerting."
+          fi
+
+      - name: Send test notification
+        if: inputs.test_alert
+        run: python -m ycfc_tickets --test-alert
+
+      - name: Check
+        if: ${{ !inputs.test_alert }}
+        run: |
+          set +e
+          python -m ycfc_tickets
+          code=$?
+          set -e
+          # A site hiccup shouldn't email you a "workflow failed" every 5 minutes: the
+          # checker sends its own phone notification if the problem keeps happening.
+          case "$code" in
+            0) ;;
+            3) echo "::warning::Couldn't read the club site this time. It will try again next run." ;;
+            4) echo "::warning::A notification failed to send. It will be retried next run." ;;
+            *) exit "$code" ;;
+          esac
+
+      - name: Save what has been seen
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          [ -f data/state.json ] || { echo "Nothing to save."; exit 0; }
+          if git show FETCH_HEAD:state.json 2>/dev/null | cmp -s - data/state.json; then
+            echo "Nothing new to save."
+            exit 0
+          fi
+          work="$(mktemp -d)"
+          cp data/state.json "$work/state.json"
+          cd "$work"
+          git init --quiet --initial-branch=state
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          git commit --quiet -m "Update saved state"
+          git push --quiet --force \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" state
+          echo "Saved state."

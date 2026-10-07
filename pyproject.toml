@@ -4,18 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ycfc-tickets"
-version = "2.0.0"
-description = "Get an email / phone alert the moment York City FC put a new home fixture on sale."
+version = "3.0.0"
+description = "Phone notifications for new York City FC home tickets and club news."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "George Williams" }]
 dependencies = [
-    "playwright>=1.40",
     "python-dotenv>=1.0",
 ]
 
 [project.optional-dependencies]
+# Only needed for the browser fallback (TICKETS_SOURCE=browser)
+browser = ["playwright>=1.40"]
 dev = ["pytest>=8", "ruff>=0.5"]
 
 [project.scripts]

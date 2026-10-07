@@ -1,3 +1,3 @@
-"""Watch the York City FC home-tickets page and alert when a new fixture goes on sale."""
+"""Phone notifications for new York City FC home tickets and club news."""
 
-__version__ = "2.0.0"
+__version__ = "3.0.0"

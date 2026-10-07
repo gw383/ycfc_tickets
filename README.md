@@ -1,158 +1,163 @@
-# YCFC Ticket Checker
+# YCFC Ticket & News Alerts
 
 [![CI](https://github.com/gw383/ycfc_tickets/actions/workflows/ci.yml/badge.svg)](https://github.com/gw383/ycfc_tickets/actions/workflows/ci.yml)
+[![Check tickets and news](https://github.com/gw383/ycfc_tickets/actions/workflows/check.yml/badge.svg)](https://github.com/gw383/ycfc_tickets/actions/workflows/check.yml)
 
-Get a push notification on your phone the moment York City FC put a new home fixture on sale, instead of refreshing the tickets page all day.
+Get a notification on your phone the moment York City FC put a new home fixture on sale or publish a news article. It runs on GitHub every few minutes, so nothing needs to be left switched on at home.
+
+Each notification has a headline, a short second line, the club crest as its icon, the fixture or article picture, and a button that opens the right page:
 
 ```
-2026-10-02 09:40:03 INFO    Loading https://www.yorkcityfootballclub.co.uk/.../home-tickets
-2026-10-02 09:40:06 INFO    On sale: York City v Northampton Town; York City v Accrington Stanley; York City v Barnet
-2026-10-02 09:40:07 INFO    ntfy alert sent
+🎫 Tickets on sale: York City v Port Vale          📰 Ticket News | Newport County (A)
+Saturday 24th October · Kick-off 3pm               Ticket News · Wed 30 Sep
+League Fixture                                     [ picture ]
+[ picture ]                                        [ Read article ]
+[ Buy tickets ]
 ```
 
 ## How it works
 
 ```
-Task Scheduler (every 10 min)
+GitHub Actions (about every 5 minutes)
+        │
+        ├─► ticket list ── the same feed the club's ticket page uses ──► fixtures on sale
+        │                  (parking, hospitality and other add-ons filtered out)
+        │
+        ├─► news feed ──── the same feed the club's News page uses ────► latest articles
         │
         ▼
- Playwright opens the tickets page ──► waits for the Future Ticketing widget (#ft_container)
-        │                              to render, then reads its text straight from the page
-        ▼
- parser: keep lines like "York City v <opponent>", drop add-ons (": Parking", hospitality…)
+ compare with what has been seen before (saved on the repo's "state" branch)
         │
         ▼
- state: compare with data/seen_fixtures.json ──► anything not seen before?
-        │                                              │
-        ▼                                              ▼
- save updated state                          push to your phone (ntfy)
+ anything new ──► push notification to your phone via ntfy
 ```
 
-The fixtures are rendered by a JavaScript ticketing widget, so a plain HTTP request can't see them. A headless browser loads the page, waits until the widget contains fixtures, and reads the text directly from the DOM.
+Things it takes care of:
 
-### What changed from v1
+- **No duplicate alerts.** Everything it has seen is remembered, so an item that briefly drops off the site isn't announced again.
+- **No spam on day one.** The first run just records what's already there.
+- **Nothing is lost if a notification fails.** It's retried on the next run.
+- **It tells you if it breaks.** If the club site can't be read three checks in a row you get a "needs a look" notification, and another when it's working again.
 
-v1 took a full-page screenshot, ran Tesseract OCR over it, and matched single words against a hand-maintained `teams.json`. v2:
+## Set it up (about 5 minutes, all in the browser)
 
-| | v1 (screenshot + OCR) | v2 (DOM text) |
-|---|---|---|
-| Accuracy | OCR guesses; multi-word names split up | exact text from the page |
-| New opponents (cup draws) | had to edit `teams.json` | picked up automatically |
-| Add-ons like "…: Parking" | could false-alarm | filtered out |
-| Waiting | fixed 8 s sleep + `networkidle` | waits only until fixtures appear |
-| Downloads | full page incl. images | images/fonts/media blocked |
-| Browser | visible window every run | headless by default |
-| Extra installs | Tesseract | none beyond Python |
-| Duplicate alerts | state overwritten each run, so a flaky load re-alerts | seen fixtures remembered for 180 days |
-| Alerts | Gmail email | push notification to your phone via ntfy |
-| Failed alert | fixture marked seen anyway | retried next run |
-| Secrets | email and Gmail password needed | just a topic name, in `.env` (git-ignored) |
+### 1. Get the ntfy app
 
-## Setup (Windows)
+[ntfy](https://ntfy.sh) is a free push-notification service with no account needed. Your phone subscribes to a topic name; anything sent to that topic pops up as a notification.
 
-Needs Python 3.10+ and git.
+1. Install **ntfy** from the App Store or Google Play.
+2. Tap **+**, enter a hard-to-guess topic name (e.g. `ycfc-g7k2q9xm`) and subscribe. Anyone who knows the name can see the alerts, so don't use something obvious.
+3. Allow notifications when asked. On Android, also turn off battery optimisation for ntfy so alerts arrive straight away.
+
+### 2. Tell GitHub your topic name
+
+Fork this repo (or use your own copy), then in the repo on GitHub:
+
+**Settings → Secrets and variables → Actions → New repository secret**
+
+- Name: `NTFY_TOPIC`
+- Secret: the topic name from step 1
+
+Secrets are hidden from everyone, including in the run logs, so this is safe in a public repo.
+
+### 3. Switch it on and test it
+
+1. Open the **Actions** tab. If GitHub asks, click **I understand my workflows, go ahead and enable them**.
+2. Pick **Check tickets and news** on the left → **Run workflow** → tick **Send a test notification** → **Run workflow**.
+3. Within a minute your phone should get two notifications: the latest fixture on sale and the latest article.
+
+That's it. From now on it checks by itself.
+
+### Optional settings
+
+Under **Settings → Secrets and variables → Actions → Variables** you can add:
+
+| Variable | What it does |
+|---|---|
+| `NEWS_CATEGORIES` | Only notify for these news categories, comma separated, e.g. `Club News,Mens,Ticket News`. Blank means all. The club uses: Club News, Mens, Womens, Academy, Ticket News, Commercial, Events, Community, General. |
+| `TICKETS_SOURCE` | `api` (default) reads the ticket feed directly. `browser` loads the page in a real browser instead: slower, but a fallback if the feed ever stops working. |
+
+## Good to know about the schedule
+
+- **"Every 5 minutes" is approximate.** GitHub runs scheduled jobs when it has spare capacity, so checks are usually 5 to 15 minutes apart and occasionally longer at busy times.
+- **GitHub pauses schedules on quiet repos.** If a public repo has no activity for 60 days, scheduled workflows are switched off and GitHub emails you. Re-enable it from the Actions tab.
+- **It's free.** GitHub Actions costs nothing for public repositories.
+- **Where the memory lives.** The list of things already seen is a small file on a branch called `state`. Delete that branch to start again from a clean slate.
+
+## Run it on your own computer
+
+Useful for trying changes. Needs Python 3.10+.
 
 ```powershell
 git clone https://github.com/gw383/ycfc_tickets.git
 cd ycfc_tickets
-powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
+powershell -ExecutionPolicy Bypass -File scripts\setup.ps1    # Windows
 ```
 
-That creates `venv\`, installs the package and Playwright's Chromium, and copies `.env.example` to `.env`.
-
 <details>
-<summary>Manual setup / macOS / Linux</summary>
+<summary>macOS / Linux</summary>
 
 ```bash
 python -m venv venv
-source venv/bin/activate            # Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -e ".[dev]"
-python -m playwright install chromium
 cp .env.example .env
 ```
 </details>
 
-### Set up phone alerts (ntfy)
-
-[ntfy](https://ntfy.sh) is a free push-notification service with no account needed. Your phone "subscribes" to a topic name; anything sent to that topic pops up as a notification.
-
-1. Install **ntfy** from the App Store or Google Play.
-2. Tap **+**, enter a hard-to-guess topic name (e.g. `ycfc-g7k2q9xm`), and subscribe. Anyone who knows the name can see the alerts, so don't use something obvious.
-3. Allow notifications when asked. On Android, also turn off battery optimisation for ntfy so alerts arrive instantly.
-4. In `.env`, set `NTFY_TOPIC` to exactly the same name. That's the only required setting; everything else in [`.env.example`](.env.example) has sensible defaults.
-
-Check it works:
-
-```powershell
-venv\Scripts\python -m ycfc_tickets --test-alert   # sends a test notification
-venv\Scripts\python -m ycfc_tickets --dry-run      # scrapes and shows what it finds
-```
-
-The **first real run** records what is currently on sale as a baseline and doesn't alert. After that you only hear about new fixtures. Use `--alert-on-first-run` if you want an alert for everything on that first run.
-
-### Schedule it
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\install_task.ps1 -Minutes 10
-```
-
-This registers a Windows scheduled task called **YCFC Ticket Checker** that runs silently with `pythonw` (no pop-up window). Output goes to `logs\ycfc_tickets.log`. To remove it:
-
-```powershell
-Unregister-ScheduledTask -TaskName "YCFC Ticket Checker" -Confirm:$false
-```
-
-## Usage
+Put your topic name in `.env` (every option is described in [`.env.example`](.env.example)), then:
 
 ```
-python -m ycfc_tickets [--dry-run] [--headed] [--screenshot PNG] [--alert-on-first-run]
-                       [--test-alert] [--env-file PATH] [-v]
+python -m ycfc_tickets --test-alert   # send the latest fixture and article to your phone
+python -m ycfc_tickets --dry-run      # show what it finds; send and save nothing
+python -m ycfc_tickets                # a real check
 ```
 
 | Flag | What it does |
 |---|---|
-| `--dry-run` | Scrapes and reports, but sends nothing and doesn't save state |
-| `--headed` | Shows the browser window |
-| `--screenshot out.png` | Saves a full-page screenshot as well (debugging) |
-| `--test-alert` | Sends a test notification to your phone |
-| `-v` | Debug logging, including the raw page text |
+| `--dry-run` | Checks and reports, but sends nothing and doesn't save state |
+| `--test-alert` | Sends the latest fixture and article as test notifications |
+| `--alert-on-first-run` | Alert for everything on the very first run instead of just recording it |
+| `-v` | Debug logging |
 
-Exit codes: `0` OK, `1` page couldn't be loaded, `2` an alert failed to send.
+Exit codes: `0` OK, `3` the club site couldn't be read, `4` a notification failed to send.
 
 ## Troubleshooting
 
-- **"No fixtures on sale right now" but there are.** Run `python -m ycfc_tickets --headed --screenshot debug.png -v` to see what the browser sees. If the site is blocking headless browsers, set `HEADLESS=false` in `.env`. If it needs cookies from an earlier visit, point `BROWSER_PROFILE` at a dedicated folder (not your everyday Chrome profile).
-- **The site's layout changed.** The parser only relies on listings reading "York City v <opponent>". If the club renames things, adjust `HOME_TEAM` / `EXCLUDE_KEYWORDS`, or the regex in `src/ycfc_tickets/parser.py`.
-- **Test alert doesn't arrive.** Check `NTFY_TOPIC` matches the topic in the app exactly (it's case-sensitive) and that notifications are allowed for ntfy.
+- **Test notification doesn't arrive.** Check the `NTFY_TOPIC` secret matches the topic in the app exactly (it's case-sensitive) and that notifications are allowed for ntfy.
+- **"YCFC checker needs a look" notification.** Tap it to open the run log. Usually the club site was down or has changed. If the ticket feed keeps failing, set the `TICKETS_SOURCE` variable to `browser`.
+- **No icon on iPhone.** ntfy only shows custom icons on Android. Pictures and buttons work on both.
 
 ## Project layout
 
 ```
 src/ycfc_tickets/
-  cli.py       command-line entry point and the main check-and-alert flow
-  config.py    settings from environment / .env
-  scraper.py   Playwright: load page, wait for widget, read text
-  parser.py    text -> list of fixtures
-  state.py     remembers which fixtures have been seen (atomic JSON writes)
-  notify.py    ntfy push notifications
-tests/          unit tests + a browser test against a local copy of the page layout
-scripts/        Windows setup, scheduled task and run helpers
+  cli.py       command-line entry point and the check-and-notify flow
+  config.py    settings from environment variables / .env
+  tickets.py   fixtures on sale, from the ticket widget's feed
+  news.py      latest articles, from the club's news feed
+  notify.py    builds and sends the ntfy notifications
+  state.py     remembers what has been seen
+  http.py      small web-request helper
+  parser.py    decides which ticket listings are real fixtures
+  scraper.py   browser fallback (optional, needs Playwright)
+tests/                        unit tests with sample feed data
+.github/workflows/check.yml   the every-5-minutes schedule
+.github/workflows/ci.yml      lint + tests on every push
 ```
 
 ## Development
 
 ```bash
-pip install -e ".[dev]"
-python -m playwright install chromium
-pytest            # browser tests are skipped if Chromium isn't installed
+pip install -e ".[dev,browser]"
+python -m playwright install chromium   # only for the browser-fallback tests
+pytest
 ruff check . && ruff format --check .
 ```
 
-CI runs lint and tests on Ubuntu and Windows for every push.
-
 ## Notes
 
-Please be considerate: checking every 10 minutes is plenty. This is a personal tool and isn't affiliated with York City FC or Future Ticketing.
+This is a personal fan project and isn't affiliated with York City FC or Future Ticketing. It makes two small requests per check to feeds the club's own website uses; please don't run it more often than every few minutes.
 
 ## License
 

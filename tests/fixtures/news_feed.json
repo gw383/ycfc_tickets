@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": "99382ca0-c161-11f1-936c-3171a6c1ebd4",
+      "type": "news-article",
+      "attributes": {
+        "postID": "99382ca0-c161-11f1-936c-3171a6c1ebd4",
+        "postTitle": "RM English extend partnership.",
+        "postSlug": "/news/2026/october/06/rm-english-extend-partnership/",
+        "postCategory": "/commercial",
+        "postCategoryName": "Commercial",
+        "postStatus": "Published",
+        "publishedDateTime": "2026-10-06T08:40:31Z",
+        "mediaLibraryID": "822d2060-c161-11f1-9957-e7b7a552be28",
+        "description": null
+      }
+    },
+    {
+      "id": "0a1b2c3d-c000-11f1-b34c-000000000002",
+      "type": "news-article",
+      "attributes": {
+        "postID": "0a1b2c3d-c000-11f1-b34c-000000000002",
+        "postTitle": "⚽ Goal of the Month | September 2026",
+        "postSlug": "/news/2026/september/30/---goal-of-the-month---september-2026/",
+        "postCategory": "/mens",
+        "postCategoryName": "Mens",
+        "postStatus": "Published",
+        "publishedDateTime": "2026-09-30T16:05:00Z",
+        "mediaLibraryID": "11111111-c000-11f1-9957-000000000002",
+        "description": null
+      }
+    },
+    {
+      "id": "0a1b2c3d-c000-11f1-b34c-000000000003",
+      "type": "news-article",
+      "attributes": {
+        "postID": "0a1b2c3d-c000-11f1-b34c-000000000003",
+        "postTitle": "Ticket News | Newport County (A)",
+        "postSlug": "/news/2026/september/30/ticket-news---newport-county--a-/",
+        "postCategory": "/ticket-news",
+        "postCategoryName": "Ticket News",
+        "postStatus": "Published",
+        "publishedDateTime": "2026-09-30T09:00:00Z",
+        "mediaLibraryID": null,
+        "description": null
+      }
+    },
+    {
+      "id": "0a1b2c3d-c000-11f1-b34c-000000000004",
+      "type": "news-article",
+      "attributes": {
+        "postID": "0a1b2c3d-c000-11f1-b34c-000000000004",
+        "postTitle": "Not live yet",
+        "postSlug": "/news/2026/september/29/not-live-yet/",
+        "postCategoryName": "Club News",
+        "postStatus": "Draft",
+        "publishedDateTime": "2026-09-29T09:00:00Z",
+        "mediaLibraryID": null
+      }
+    }
+  ],
+  "meta": {"totalCount": 1673, "totalPages": 558},
+  "links": {}
+}

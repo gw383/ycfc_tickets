@@ -1,6 +1,6 @@
-"""End-to-end check of the browser step against a local copy of the page layout.
+"""End-to-end check of the browser fallback against a local copy of the page layout.
 
-Skipped automatically if Playwright's Chromium isn't installed.
+Skipped automatically if Playwright (the optional "browser" extra) isn't installed.
 """
 
 from pathlib import Path
@@ -10,6 +10,7 @@ import pytest
 from ycfc_tickets.config import DEFAULT_EXCLUDE, Settings
 from ycfc_tickets.parser import parse_fixtures
 from ycfc_tickets.scraper import ScrapeError, fetch_page_text
+from ycfc_tickets.tickets import fetch_fixtures
 
 PAGE = (Path(__file__).parent / "fixtures" / "tickets_page.html").resolve()
 
@@ -34,11 +35,20 @@ pytestmark = [
 def test_waits_for_widget_and_reads_fixtures():
     settings = Settings(tickets_url=PAGE.as_uri(), page_timeout_ms=10_000)
     text = fetch_page_text(settings)
-    assert parse_fixtures(text, exclude_keywords=DEFAULT_EXCLUDE) == [
+    fixtures = parse_fixtures(text, exclude_keywords=DEFAULT_EXCLUDE)
+    assert [f.name for f in fixtures] == [
         "York City v Northampton Town",
         "York City v Accrington Stanley",
     ]
     assert "For car parking" not in text  # only the widget's text is read
+
+
+def test_browser_fallback_returns_fixtures():
+    settings = Settings(tickets_url=PAGE.as_uri(), page_timeout_ms=10_000, tickets_source="browser")
+    assert [f.name for f in fetch_fixtures(settings)] == [
+        "York City v Northampton Town",
+        "York City v Accrington Stanley",
+    ]
 
 
 def test_screenshot_option(tmp_path):

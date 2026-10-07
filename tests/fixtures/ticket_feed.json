@@ -1,0 +1,64 @@
+{
+  "eml": "https://embed.futureticketing.ie",
+  "emu": "https://www.yorkcityfootballclub.co.uk/tickets-and-hospitality/match-tickets/home-tickets",
+  "ho": "https://www.yorkcityfootballclub.co.uk",
+  "e": "",
+  "sc": 1,
+  "d": [
+    {
+      "cecn": null,
+      "cvna": "York City FC",
+      "edate": "24-Oct-2026",
+      "eddate": "Saturday 24th October - Kick Off 3PM",
+      "edesc": "<p>Secure a match day parking place to watch York City</p>",
+      "eimage": "img/069e8d39-9c6d-4466-ab57-31570e3b27d6/2c996a9d84ded930bb1cda18d0003eaa.png",
+      "ename": "York City v Port Vale: Parking",
+      "eso": "0",
+      "euid": "f9b8f923-d746-4ccd-a9e7-67e4ed69800d"
+    },
+    {
+      "cecn": "League Fixture",
+      "cvna": "York City FC",
+      "edate": "10-Oct-2026",
+      "eddate": "Saturday 10th October - Kick Off 3pm",
+      "edesc": "<p>Skybet League 2.</p>",
+      "eimage": "img/069e8d39-9c6d-4466-ab57-31570e3b27d6/83c9457aceb71192c36c821709110ea1.png",
+      "ename": "York City v Northampton Town",
+      "eso": "0",
+      "euid": "54a25c73-23ae-4d7d-ab42-2f862f2b38c7"
+    },
+    {
+      "cecn": "League Fixture",
+      "cvna": "York City FC",
+      "edate": "20-Oct-2026",
+      "eddate": "Tuesday 20th October - Kick Off 7:45pm",
+      "edesc": "<p>Skybet League 2.</p>",
+      "eimage": "img/069e8d39-9c6d-4466-ab57-31570e3b27d6/25fc9b8aea0bbf41ff228dc6fd19251c.png",
+      "ename": "York City v Accrington Stanley",
+      "eso": "0",
+      "euid": "0f2005f4-b91e-43ad-b987-d6e750b183b1"
+    },
+    {
+      "cecn": "League Fixture",
+      "cvna": "York City FC",
+      "edate": "24-Oct-2026",
+      "eddate": "Saturday 24th October - Kick Off 3pm",
+      "edesc": "<p>Skybet League 2.</p>",
+      "eimage": "img/069e8d39-9c6d-4466-ab57-31570e3b27d6/861051b8c4ce38f679f3bdad7c34eec7.png",
+      "ename": "York City v Port Vale",
+      "eso": "0",
+      "euid": "aa11bb22-0000-4000-8000-000000000001"
+    },
+    {
+      "cecn": "Car Parking",
+      "cvna": "York City FC",
+      "edate": "20-Oct-2026",
+      "eddate": "Tuesday 20th October - Kick Off 7:45PM",
+      "edesc": "",
+      "eimage": "img/069e8d39-9c6d-4466-ab57-31570e3b27d6/df414df5ebf998d745eea36d45ae5da8.png",
+      "ename": "York City v Accrington Stanley: Parking",
+      "eso": "0",
+      "euid": "aa11bb22-0000-4000-8000-000000000002"
+    }
+  ]
+}
