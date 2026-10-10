@@ -1,0 +1,95 @@
+{
+  "fixtures": {
+    "York City v Accrington Stanley": {
+      "first_seen": "2026-10-08T01:10:52+00:00",
+      "label": "York City v Accrington Stanley"
+    },
+    "York City v Northampton Town": {
+      "first_seen": "2026-10-08T01:10:52+00:00",
+      "label": "York City v Northampton Town"
+    },
+    "York City v Port Vale": {
+      "first_seen": "2026-10-08T01:10:52+00:00",
+      "label": "York City v Port Vale"
+    },
+    "York City v Walsall": {
+      "first_seen": "2026-10-10T19:20:43+00:00",
+      "label": "York City v Walsall"
+    }
+  },
+  "news": {
+    "103c60d0-b8e5-11f1-b91a-eb2cd61c28fd": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Vacancy | Women’s Professional Development Phase Coach"
+    },
+    "273f5cd0-bcc1-11f1-9def-49a957bbb5d2": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Vacancy | Brand Development Manager"
+    },
+    "436cb530-be68-11f1-bcb8-2149908a7f7c": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Bootham Timeline Trail 2026"
+    },
+    "44eb52d0-bbdf-11f1-9024-2347aa644870": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "FCS Commercial join partner roster."
+    },
+    "489f9b90-c4cf-11f1-9262-71e12e8d1b25": {
+      "first_seen": "2026-10-10T19:20:44+00:00",
+      "label": "Match Report | York City 1-1 Northampton Town"
+    },
+    "4af77e40-bf3d-11f1-b8bf-5f2ec3f1142d": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "U18 Match Report | York City 2-2 Port Vale"
+    },
+    "78935320-bccb-11f1-8076-f505bada1d52": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "U18 Match Preview | Port Vale (H) | Saturday 3rd October"
+    },
+    "7e293140-bcb4-11f1-83fb-ab69fb6206f3": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "⚽ Goal of the Month | September 2026"
+    },
+    "977509f0-bcad-11f1-8751-65a054a89267": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Ticket News | Newport County (A)"
+    },
+    "982eb510-b9d0-11f1-9faf-2bcf36fd234f": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Match Report | York City 3-0 Gillingham"
+    },
+    "99382ca0-c161-11f1-936c-3171a6c1ebd4": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "RM English extend partnership."
+    },
+    "becc44f0-b7f3-11f1-ae62-a7e67b6f3f06": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "3Active continue partnership."
+    },
+    "cd456500-c3da-11f1-a4b5-2f3fc823cab8": {
+      "first_seen": "2026-10-09T13:52:08+00:00",
+      "label": "Match Preview | Northampton Town (H) | Saturday 10th October"
+    },
+    "dbad2e90-b8d9-11f1-99fc-15a00077ee11": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Match Preview | Gillingham (H) | Saturday 26th September"
+    },
+    "e1028960-c317-11f1-be53-8b93d042d0ad": {
+      "first_seen": "2026-10-09T13:52:08+00:00",
+      "label": "U18 Match Preview | Stockport County (A) | Saturday 10th October"
+    },
+    "efb41df0-c0ad-11f1-b34c-711b8df27d63": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Stoneacre partner club for 26/27 season."
+    },
+    "f46098d0-b8c7-11f1-ba75-ab7f9ce5534b": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Barnet fixture rescheduled."
+    },
+    "fc5942f0-bb1d-11f1-8fd7-253bcf5fc10d": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Gallery | York City 3-0 Gillingham"
+    }
+  },
+  "version": 2
+}
