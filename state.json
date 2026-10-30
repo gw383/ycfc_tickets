@@ -1,0 +1,251 @@
+{
+  "fixtures": {
+    "York City v Accrington Stanley": {
+      "first_seen": "2026-10-08T01:10:52+00:00",
+      "label": "York City v Accrington Stanley"
+    },
+    "York City v Northampton": {
+      "first_seen": "2026-10-28T15:48:36+00:00",
+      "label": "York City v Northampton"
+    },
+    "York City v Northampton Town": {
+      "first_seen": "2026-10-08T01:10:52+00:00",
+      "label": "York City v Northampton Town"
+    },
+    "York City v Port Vale": {
+      "first_seen": "2026-10-08T01:10:52+00:00",
+      "label": "York City v Port Vale"
+    },
+    "York City v Shrewsbury": {
+      "first_seen": "2026-10-20T22:29:45+00:00",
+      "label": "York City v Shrewsbury"
+    },
+    "York City v Walsall": {
+      "first_seen": "2026-10-10T19:20:43+00:00",
+      "label": "York City v Walsall"
+    }
+  },
+  "news": {
+    "0245eb80-d2e0-11f1-a1b2-f5135cfe4f33": {
+      "first_seen": "2026-10-28T20:39:36+00:00",
+      "label": "U18 Match Report | Wigan Athletic 4-0 York City"
+    },
+    "0522ecf0-cbff-11f1-813d-2382a5fe1ca4": {
+      "first_seen": "2026-10-21T15:38:49+00:00",
+      "label": "Ticket & Travel Details | Colchester United (A)"
+    },
+    "0551a250-c8c3-11f1-90bb-f13579fd5a6c": {
+      "first_seen": "2026-10-15T19:09:52+00:00",
+      "label": "U18 Match Preview | Oldham Athletic (A) | Saturday 17th October"
+    },
+    "05ff9460-d26d-11f1-af4b-17e19b8b5685": {
+      "first_seen": "2026-10-28T02:24:51+00:00",
+      "label": "Match Report | Barnet 3-1 York City"
+    },
+    "0876f750-d14c-11f1-9658-d91fb4ccb83c": {
+      "first_seen": "2026-10-26T19:50:03+00:00",
+      "label": "Match Preview | Barnet FC (A) | Tuesday 27th October"
+    },
+    "103c60d0-b8e5-11f1-b91a-eb2cd61c28fd": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Vacancy | Women’s Professional Development Phase Coach"
+    },
+    "15ba25d0-ccd4-11f1-93b5-bd76110741f1": {
+      "first_seen": "2026-10-20T22:29:46+00:00",
+      "label": "Match Report | York City 1-1 Accrington Stanley"
+    },
+    "15f05840-d0ca-11f1-87e6-e991c4c885ff": {
+      "first_seen": "2026-10-25T23:20:30+00:00",
+      "label": "Gallery | York City 2-0 Port Vale"
+    },
+    "1ac3c430-d0c8-11f1-a0aa-17ebea756bca": {
+      "first_seen": "2026-10-25T23:20:30+00:00",
+      "label": "Gallery | Fishburn Park 1-3 York City"
+    },
+    "1d9b0c10-c8f1-11f1-bad2-8584f4ae5466": {
+      "first_seen": "2026-10-16T09:40:57+00:00",
+      "label": "Match Preview | Newport County (A) | Saturday 17th October"
+    },
+    "273f5cd0-bcc1-11f1-9def-49a957bbb5d2": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Vacancy | Brand Development Manager"
+    },
+    "28eca300-cb38-11f1-8737-0585ae992bb1": {
+      "first_seen": "2026-10-18T22:22:56+00:00",
+      "label": "U18 Match Report | Oldham Athletic 2-1 York City"
+    },
+    "33fe3030-cbbd-11f1-b4eb-5159fc1b970b": {
+      "first_seen": "2026-10-19T17:12:32+00:00",
+      "label": "York City support Together Against Racism"
+    },
+    "3acf60c0-c972-11f1-adda-c5e654a6216e": {
+      "first_seen": "2026-10-16T18:14:24+00:00",
+      "label": "Emirates FA Cup first round draw details confirmed"
+    },
+    "3cf088a0-ca5a-11f1-9ee9-4fbf20351dbc": {
+      "first_seen": "2026-10-17T21:41:30+00:00",
+      "label": "Match Report | Newport County 1-1 York City"
+    },
+    "3f710340-d471-11f1-bcf5-3dd88c941ee4": {
+      "first_seen": "2026-10-30T15:54:01+00:00",
+      "label": "Match Preview | Grimsby Town (A) | Saturday 31st October"
+    },
+    "436cb530-be68-11f1-bcb8-2149908a7f7c": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Bootham Timeline Trail 2026"
+    },
+    "44eb52d0-bbdf-11f1-9024-2347aa644870": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "FCS Commercial join partner roster."
+    },
+    "489f9b90-c4cf-11f1-9262-71e12e8d1b25": {
+      "first_seen": "2026-10-10T19:20:44+00:00",
+      "label": "Match Report | York City 1-1 Northampton Town"
+    },
+    "4a3d6030-cb29-11f1-8941-f1ac9bdf960e": {
+      "first_seen": "2026-10-18T19:57:19+00:00",
+      "label": "Gallery | Newport County 1-1 York City"
+    },
+    "4af77e40-bf3d-11f1-b8bf-5f2ec3f1142d": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "U18 Match Report | York City 2-2 Port Vale"
+    },
+    "5dc9c7c0-c71d-11f1-a340-73e98e071f69": {
+      "first_seen": "2026-10-13T21:12:16+00:00",
+      "label": "U18 Match Report | Burton Albion 0-3 York City"
+    },
+    "773255f0-c502-11f1-9186-c7d24e0c7749": {
+      "first_seen": "2026-10-11T01:21:23+00:00",
+      "label": "U18 Match Report | Stockport County 1-0 York City"
+    },
+    "78935320-bccb-11f1-8076-f505bada1d52": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "U18 Match Preview | Port Vale (H) | Saturday 3rd October"
+    },
+    "7ab6c850-cc82-11f1-bc1e-8f871fb08d64": {
+      "first_seen": "2026-10-20T19:21:38+00:00",
+      "label": "Ash Palmer joins Southend on loan."
+    },
+    "7e293140-bcb4-11f1-83fb-ab69fb6206f3": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "⚽ Goal of the Month | September 2026"
+    },
+    "8b03e8e0-d0c5-11f1-af35-35ae5436c0e3": {
+      "first_seen": "2026-10-25T23:20:30+00:00",
+      "label": "Gallery | York City 1-1 Accrington Stanley"
+    },
+    "8e9b29e0-d148-11f1-bc3b-75287a6a4698": {
+      "first_seen": "2026-10-26T19:50:03+00:00",
+      "label": "Ticket Details | Northampton Town (H) | FA Cup"
+    },
+    "977509f0-bcad-11f1-8751-65a054a89267": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Ticket News | Newport County (A)"
+    },
+    "982eb510-b9d0-11f1-9faf-2bcf36fd234f": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Match Report | York City 3-0 Gillingham"
+    },
+    "99382ca0-c161-11f1-936c-3171a6c1ebd4": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "RM English extend partnership."
+    },
+    "9a137200-d076-11f1-8220-e188700fd1b7": {
+      "first_seen": "2026-10-25T15:33:10+00:00",
+      "label": "U18 Match Preview | Wigan Athletic (A) | Tuesday 27th October"
+    },
+    "9c45df60-cbb5-11f1-a4c2-d3566fca4c46": {
+      "first_seen": "2026-10-19T17:12:32+00:00",
+      "label": "Match Preview | Accrington Stanley (H) | Tuesday 20th October"
+    },
+    "9cd3f1b0-ceee-11f1-8454-d5d819116181": {
+      "first_seen": "2026-10-23T17:05:26+00:00",
+      "label": "Match Preview | Post Vale (H) | Saturday 24th October"
+    },
+    "a5e0f080-cdab-11f1-80c4-414ecd2a1b22": {
+      "first_seen": "2026-10-22T01:01:20+00:00",
+      "label": "Match Report | Fishburn Park 1-3 York City"
+    },
+    "b44c7c30-c62f-11f1-9f60-2baced5404b3": {
+      "first_seen": "2026-10-12T19:09:27+00:00",
+      "label": "Ticket & Travel Details | Barnet (A)"
+    },
+    "b96f9b20-d228-11f1-af3f-811ed5094b94": {
+      "first_seen": "2026-10-27T19:40:44+00:00",
+      "label": "Ticket Details | Bradford City (A)"
+    },
+    "bec32f80-cbc3-11f1-b7d6-795bfd730928": {
+      "first_seen": "2026-10-21T00:51:57+00:00",
+      "label": "Match Preview | Fishburn Park (A) | Wednesday 21st October"
+    },
+    "becc44f0-b7f3-11f1-ae62-a7e67b6f3f06": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "3Active continue partnership."
+    },
+    "c7039b60-cdf5-11f1-ba76-2f4396c3c87c": {
+      "first_seen": "2026-10-22T11:45:10+00:00",
+      "label": "Sold Out | Port Vale (H)"
+    },
+    "cc509a40-c586-11f1-8e29-552da2388b27": {
+      "first_seen": "2026-10-11T19:05:59+00:00",
+      "label": "Gallery | York City 1-1 Northampton Town"
+    },
+    "cd456500-c3da-11f1-a4b5-2f3fc823cab8": {
+      "first_seen": "2026-10-09T13:52:08+00:00",
+      "label": "Match Preview | Northampton Town (H) | Saturday 10th October"
+    },
+    "ce5beca0-c620-11f1-b293-ada96cd37064": {
+      "first_seen": "2026-10-12T19:09:27+00:00",
+      "label": "Ticket & Travel Details | Grimsby Town (A)"
+    },
+    "d5bb5600-d2d4-11f1-861d-85fdff140d07": {
+      "first_seen": "2026-10-28T15:48:37+00:00",
+      "label": "Gallery | Barnet 3-1 York City"
+    },
+    "d7b1d060-cbe5-11f1-9cc3-13f48d66a8ec": {
+      "first_seen": "2026-10-19T21:35:32+00:00",
+      "label": "City drawn at home to Northampton Town in Emirates FA Cup first round"
+    },
+    "d80801d0-d458-11f1-9997-5f188522f061": {
+      "first_seen": "2026-10-30T15:54:01+00:00",
+      "label": "U18 Match Preview | Rotherham United (H) | Saturday 31st October"
+    },
+    "dbad2e90-b8d9-11f1-99fc-15a00077ee11": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Match Preview | Gillingham (H) | Saturday 26th September"
+    },
+    "e1028960-c317-11f1-be53-8b93d042d0ad": {
+      "first_seen": "2026-10-09T13:52:08+00:00",
+      "label": "U18 Match Preview | Stockport County (A) | Saturday 10th October"
+    },
+    "e3975ec0-cc0f-11f1-97b9-cf86956829fd": {
+      "first_seen": "2026-10-20T15:12:35+00:00",
+      "label": "Match details confirmed for FA Youth Cup first round tie at Wigan Athletic"
+    },
+    "e4e0a5b0-c8f0-11f1-9f2b-c7b1223ac6e7": {
+      "first_seen": "2026-10-16T14:20:26+00:00",
+      "label": "Young Minstermen drawn away at Wigan Athletic in FA Youth Cup First Round"
+    },
+    "efb41df0-c0ad-11f1-b34c-711b8df27d63": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Stoneacre partner club for 26/27 season."
+    },
+    "f46098d0-b8c7-11f1-ba75-ab7f9ce5534b": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Barnet fixture rescheduled."
+    },
+    "f61a1bd0-cba3-11f1-a759-394ca365ae6a": {
+      "first_seen": "2026-10-19T10:42:58+00:00",
+      "label": "Interactive half-time SpeedQuizzing."
+    },
+    "fc5942f0-bb1d-11f1-8fd7-253bcf5fc10d": {
+      "first_seen": "2026-10-08T01:10:53+00:00",
+      "label": "Gallery | York City 3-0 Gillingham"
+    },
+    "fe2a8ca0-c7b7-11f1-ac65-3b63964b0c07": {
+      "first_seen": "2026-10-14T15:14:55+00:00",
+      "label": "Ticket Details | Fishburn Park (A)"
+    }
+  },
+  "version": 2
+}
